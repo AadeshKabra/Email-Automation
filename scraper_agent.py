@@ -127,7 +127,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
 
-class IntelligentWebScraper():
+class ScrapingAgent():
     """
     An intelligent web scraper that uses LLM to extract information from webpages
     based on natural language queries.
@@ -299,7 +299,7 @@ class IntelligentWebScraper():
 
 
 
-with IntelligentWebScraper() as scraper:
+with ScrapingAgent() as scraper:
     # url = "https://www.cs.umd.edu/people/faculty"
     url = "https://www.cs.umd.edu/people/amol"
 

@@ -1,0 +1,4 @@
+# Browser automation dependencies (used by browser_session.py)
+webdriver-manager
+selenium
+beautifulsoup4

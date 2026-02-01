@@ -1,9 +1,9 @@
 from langchain_core.tools import tool
-from langchain_ollama import ChatOllama 
 from browser_session import BrowserSession
+from ollama_agent import ollama_simple_chat
 
 
-browser = BrowserSession()
+_browser_instance = None
 
 
 def get_browser():
@@ -31,6 +31,7 @@ def get_current_page_text():
 @tool
 def list_all_links():
     """Get all links from current page"""
+    browser = get_browser()
     links = browser.get_all_links()
     result = f"Found {len(links)} total links. Showing first 20:\n\n"
     for i, link in enumerate(links[:20], 1):
@@ -55,8 +56,6 @@ def extract_information(question):
     browser = get_browser()
     content = browser.get_page_content()
 
-    llm = ChatOllama(model="kimi-k2.5:cloud")
-
     prompt = f"""Based on the webpage content below, answer this question: {question}
         Webpage content:
     {content[:5000]}
@@ -66,9 +65,7 @@ def extract_information(question):
     
     Answer:
     """
-
-    response = llm.invoke(prompt)
-    return response.content
+    return ollama_simple_chat(prompt)
 
 
 @tool

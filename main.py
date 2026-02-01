@@ -15,14 +15,16 @@
 
 
 from browsing_agent import create_browsing_agent
-from browser_tools import browser
+from browser_tools import close_browser
 
 
 def main():
     agent = create_browsing_agent()
 
-    url = "https://www.cs.umd.edu/people/phonebook/faculty"
-    question = "Find the email address of Professor Amol Deshpande"
+    # url = "https://www.cs.umd.edu/people/faculty"
+    url = "https://me.umd.edu/clark/facultydir?facultylayout=1"
+    question = "Find the email address of Amr Baz"
+    # question = "Give me email-ids of all professors having research interest in Natural Language Processing"
 
     user_input = f"""
     Starting URL: {url}
@@ -35,7 +37,7 @@ def main():
 
     print(result["output"])
 
-    browser.close()
+    close_browser()
 
 
 

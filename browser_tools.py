@@ -42,7 +42,20 @@ def list_all_links():
 
 @tool
 def click_on_link(link_url):
-    """Click on a specific link to navigate"""
+    """
+    Click on a specific link to navigate to a new page.
+    Use this when you've identified a relevant link from list_all_links 
+    or find_link_by_text and want to explore that page for more information.
+    
+    IMPORTANT: Always use list_all_links or find_link_by_text first to see 
+    available links, then use the exact URL from those results.
+    
+    Args:
+        link_url: The complete URL of the link to click (must be exact URL from page)
+    
+    Returns:
+        Confirmation message that the link was clicked and new page loaded
+    """
     browser = get_browser()
     return browser.click_links(link_url)
 
@@ -57,14 +70,15 @@ def extract_information(question):
     content = browser.get_page_content()
 
     prompt = f"""Based on the webpage content below, answer this question: {question}
-        Webpage content:
-    {content[:5000]}
+        Webpage content: {content[:5000]}
     
     If you can answer the question, provide the answer.
     If the information is NOT on this page, respond with exactly: NOT FOUND
     
     Answer:
     """
+
+    
     return ollama_simple_chat(prompt)
 
 
